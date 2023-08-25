@@ -5,6 +5,8 @@
 `timescale 1ns/1ps 
 `default_nettype none
 
+/* verilator lint_off UNUSED */
+
 module tt_um_thorkn_pwmaudio (
   input  wire [7:0] ui_in,    // Dedicated inputs
   output wire [7:0] uo_out,   // Dedicated outputs
@@ -29,8 +31,9 @@ module tt_um_thorkn_pwmaudio (
     .reset          (reset                      )  //i
   );
 
-  assign uo_out[0] = pwm_low_out; 
-  assign uo_out[1] = pwm_high_out; 
+  assign uo_out = {6'b0000_00, pwm_high_out, pwm_low_out}; 
+  assign uio_out = 8'b0000_0000;
+  assign uio_oe = 8'b0000_0000;
 
 endmodule
 
